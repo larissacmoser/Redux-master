@@ -28,14 +28,13 @@ const Home: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const deposito = () => {
-    if (walletRedux.balance <= -1000) {
-      alert("Saldo insuficiente!");
+    if (walletRedux.balance - valor <= -1000) {
+      alert("voce chegou no cheque especial");
       return;
     }
     if (type === "income") {
       dispatch(addIncome(valor));
       dispatch(updateBalance());
-
       setValor(0);
     } else {
       dispatch(addOutcome(valor));
@@ -43,28 +42,39 @@ const Home: React.FC = () => {
       setValor(0);
     }
   };
-
   return (
     <React.Fragment>
-      <Container
+      <Grid
+        container
         sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
           height: "100vh",
-          backgroundColor: "#c9c9c9",
         }}
       >
-        <Grid container>
+        <Paper
+          elevation={3}
+          sx={{
+            backgroundColor: "rgba(255,255,255,0.8)",
+            padding: "15px",
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
+        >
           <Grid item xs={12}>
             <Grid container>
               <Grid item xs={12}>
-                <h1>Carteira Growdev</h1>
+                <h1>CARTEIRA GROWDEV</h1>
               </Grid>
               <Grid item sx={{ fontSize: "45px" }} xs={12}>
                 <AccountBalanceWalletIcon fontSize="large" /> R$
                 {walletRedux.balance}
               </Grid>
               <Grid item xs={12}>
-                <h2>Saldo + Limite</h2>
-                <p style={{ fontSize: "45px" }}>
+                <h2>SALDO + LIMITE</h2>
+                <p style={{ fontSize: "45px", margin: "0px" }}>
                   R${walletRedux.balance + 1000}
                 </p>
               </Grid>
@@ -137,8 +147,8 @@ const Home: React.FC = () => {
               </Grid>
             </Paper>
           </Grid>
-        </Grid>
-      </Container>
+        </Paper>
+      </Grid>
     </React.Fragment>
   );
 };
